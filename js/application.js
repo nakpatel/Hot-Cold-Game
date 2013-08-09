@@ -32,7 +32,16 @@ $(function(){
     });
 // Program returns Answer when Answer button is clicked
     $('.button.red').click(function(answer){
-      alert("The answer is" +" "+randomnumber+"!");
+    	if(confirm("Are you sure you want the answer?")==false){
+      	return;
+      	}
+      	else if(confirm("Are you really really sure you want the answer?")==false){
+      	return;
+      	}
+      else{
+	      alert("The answer is" +" "+randomnumber+"!");
+	      $('.loser').fadeIn();
+  	  }
     });
 
 // User submits guess into HTML form id = "guess", Program captures guess as a variable
@@ -63,21 +72,3 @@ submit.onclick = function compare(){
 	}
 
 });
-
-
-//	$('#submit').click(function(submit){
-//		var submit = document.getElementById("submit");
-//		var guess = document.getElementById("guess").value;
-//		console.log(guess);
-//	}); 
-
-
-
-
-
-
-
-// Program compares Guess with answer
-		// If Guess<Answer, program flashes  "Higher"
-		// Else if Guess>Answer, program returns "Lower"
-		// else if Guess===Answer, program returns "Correct!"
