@@ -17,6 +17,8 @@ $(function(){
 	$('.cover').on('mouseleave', function(){
 		event.preventDefault();
 		$('.covertext').show();
+		$('.low').hide();
+		$('.high').hide();
 	});	
 
 // Program Generate random number for guessing between 1 - 100 + Sets Global Variables
@@ -40,13 +42,30 @@ $(function(){
       	}
       else{
 	      alert("The answer is" +" "+randomnumber+"!");
-	      $('.loser').fadeIn();
+	      $('.low').hide();
+		  $('.high').hide();
+	      $('.loser').fadeIn('slow');
+	      $('.loser').fadeOut('slow');
+	      $('.loser').fadeIn('slow');
+	      $('.loser').fadeOut('slow');
+	      $('.loser').fadeIn('slow');
+	      $('.loser').fadeOut('slow');
   	  }
     });
+
+// Enter Key Submits Form
+	document.getElementById("guess").onkeypress= function(event) {
+		if(event.keyCode == 13) {
+			event.preventDefault();
+			submit.click();
+		}
+	} 
 
 // User submits guess into HTML form id = "guess", Program captures guess as a variable
 submit.onclick = function compare(){
 	guess = document.getElementById("guess").value;
+	$('.high').hide();
+	$('.low').hide();
 	if (guess==randomnumber){
 		$('.winner').fadeIn();
 		$('.winner').fadeOut();
@@ -57,17 +76,21 @@ submit.onclick = function compare(){
 		$('.winner').fadeIn();
 		console.log("You Win");
 		}
+	else if (guess>100||guess<1){
+		$('.guesstype').fadeIn();
+		$('.guesstype').fadeOut();
+		$('.guesstype').fadeIn();
+		$('.guesstype').fadeOut();
+		$('.guesstype').fadeIn();
+		$('.guesstype').fadeOut();
+		$('.guesstype').fadeIn();
+		$('.guesstype').fadeOut();
+	}
 	else if (guess>randomnumber){
 		$('.low').fadeIn('slow');
-		$('.low').fadeOut('slow');
-		$('.low').fadeIn('slow');
-		$('.low').fadeOut('slow');
 		}
 	else if(guess<randomnumber){
 		$('.high').fadeIn('slow');
-		$('.high').fadeOut('slow');
-		$('.high').fadeIn('slow');
-		$('.high').fadeOut('slow');
 		}
 	}
 
