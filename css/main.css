@@ -15,6 +15,9 @@ body {
   line-height: 1.5em;
 }
 
+a{
+  color: #FFFFFF;
+}
 
 /*Sliding Door Section*/
 .cover {
@@ -244,4 +247,15 @@ body {
     font-size: 42px;
     color: #5cb811;
     display: none;
+}
+
+.loser {
+    font-size: px;
+    color: #5cb811;
+    display: none;
+}
+
+.footer{
+  font-size: 16px;
+  text-align: center;
 }
