@@ -1,97 +1,59 @@
-$(function(){
-//Show/Hide Cover Text On Hover
-	$('.cover').on('mouseenter', function(){
-		event.preventDefault();
-		$('.game1').hide();
-		$('.game2').hide();
-	});
-	$('.cover').on('mouseleave', function(){
-		event.preventDefault();
-		$('.game1').show();
-		$('.game2').show();
-	});
-	$('.cover').on('mouseenter', function(){
-		event.preventDefault();
-		$('.covertext').hide();
-	});
-	$('.cover').on('mouseleave', function(){
-		event.preventDefault();
-		$('.covertext').show();
-		$('.low').hide();
-		$('.high').hide();
-	});	
+$(document).ready(startApp);
 
-// Program Generate random number for guessing between 1 - 100 + Sets Global Variables
-		var poolsize = 100;
-		// Program stores random number as a variable
-		var randomnumber = Math.floor(Math.random()*poolsize) + 1;
-		var submit = document.getElementById("submit");
-		var guess = document.getElementById("guess").value;
+function startApp() {
 
-// Program resets randomnumber when New Game button is clicked
-  $('.button.newgame').click(function(reset){
-  	location.reload();
+    // initialize the app
+    var itemCount = 0;
+    var itemInput = $("#itemInput");
+    itemInput.val("");
+
+    // define what item is submitted either by click or by enter
+    $("#addItem").click(toDoList);
+    $("#itemInput").keydown(function (enter) {
+        if (enter.keyCode == 13) {
+            toDoList()
+        }
     });
-// Program returns Answer when Answer button is clicked
-    $('.button.red').click(function(answer){
-    	if(confirm("Are you sure you want the answer?")==false){
-      	return;
-      	}
-      	else if(confirm("Are you really really sure you want the answer?")==false){
-      	return;
-      	}
-      else{
-	      alert("The answer is" +" "+randomnumber+"!");
-	      $('.low').hide();
-		  $('.high').hide();
-	      $('.loser').fadeIn('slow');
-	      $('.loser').fadeOut('slow');
-	      $('.loser').fadeIn('slow');
-	      $('.loser').fadeOut('slow');
-	      $('.loser').fadeIn('slow');
-	      $('.loser').fadeOut('slow');
-  	  }
-    });
+    // To Do List Function That Runs on Key Down or Click
+    function toDoList() {
+        if (itemInput.val() === '') {
+            return;
+        }
+        // define incomplete and complete lists and item to add
+        var incompleteItems = $(".incomplete-items");
+        var completeItems = $(".complete-items");
+        var itemToAdd = itemInput.val();
+        console.log(itemToAdd)
+        itemInput.val("");
 
-// Enter Key Submits Form
-	document.getElementById("guess").onkeypress= function(event) {
-		if(event.keyCode == 13) {
-			event.preventDefault();
-			submit.click();
-		}
-	} 
+        // create a list item and checkbox, assigning an id to it.
+        var liItem = $("<li><input type='checkbox' name=" + itemToAdd + " value=" + itemToAdd +">"+ "         "+ itemToAdd + "<a class='delete' href='#'> <img src='img/trash.png' title='trash'></a></li>");
+        liItem.attr("id", "item[" + itemCount+++"]");
+        incomplete(liItem);
 
-// User submits guess into HTML form id = "guess", Program captures guess as a variable
-submit.onclick = function compare(){
-	guess = document.getElementById("guess").value;
-	$('.high').hide();
-	$('.low').hide();
-	if (guess==randomnumber){
-		$('.winner').fadeIn();
-		$('.winner').fadeOut();
-		$('.winner').fadeIn();
-		$('.winner').fadeOut();
-		$('.winner').fadeIn();
-		$('.winner').fadeOut();
-		$('.winner').fadeIn();
-		console.log("You Win");
-		}
-	else if (guess>100||guess<1){
-		$('.guesstype').fadeIn();
-		$('.guesstype').fadeOut();
-		$('.guesstype').fadeIn();
-		$('.guesstype').fadeOut();
-		$('.guesstype').fadeIn();
-		$('.guesstype').fadeOut();
-		$('.guesstype').fadeIn();
-		$('.guesstype').fadeOut();
-	}
-	else if (guess>randomnumber){
-		$('.low').fadeIn('slow');
-		}
-	else if(guess<randomnumber){
-		$('.high').fadeIn('slow');
-		}
-	}
+        //delete items from the lists
+        liItem.find("a").click(function () {
+            $(this).parent().hide('slow', function () {
+                $(this).remove();
+            });
+        });
+        // add the item to the incomplete list
+        function incomplete(liItem) {
+            liItem.hide();
+            incompleteItems.append(liItem);
+            liItem.fadeIn('slow');
+        }
+        // move the corresponding list item to 'complete' when checkbox is clicked.
+        function complete(liItem) {
+            liItem.hide();
+            completeItems.append(liItem);
+            liItem.fadeIn('slow');
+        }
+        //toggle
+        liItem.find("input:checkbox").click(function () {
+            this.checked ? complete(liItem) : incomplete(liItem);
+        });
 
-});
+    }
+}
+

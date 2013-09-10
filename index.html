@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>Nak's Hot Cold Game!</title>
+        <title>CompleteMe</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/normalize.css">
@@ -13,41 +13,28 @@
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <div class="cover">        <!-- Sliding Door Effect -->
-            <div class="left_gate">
-                <p class="covertext">Hot</p>
-                <img src="img/fire.png" alt="fire" class="fire">
-                <p class="high">Higher</p>
-                <p class="game1">GA</p>
+    		<div class="wrapper">
+    			<h1>Complete<a id="main">Me</a></h1>
+    			<p>Track & Complete Your Daily Tasks. On time. All the time.</p>
+    		<div class="inputWrapper">
+	                  <input type="text" id="itemInput" name="itemInput" maxlength="55" placeholder="Enter an task here..."/>
+	                  <button id="addItem">ADD TASK</button>
+	                </div>
+        	<div class="items">
+             		<div class="incomplete">
+             			<h3>Incomplete Tasks</h3>
+		             	 <ul class="incomplete-items">
+		             	 </ul>
+					 </div>
+	             	<div class="complete">
+	                	<h3>Completed Tasks</h3>
+	                	  <ul class="complete-items">
+						</ul>
+					</div>
+				</div>
+			</div>
+
             </div>
-            <div class="right_gate">
-                <p class="covertext">Cold</p>
-                 <img src="img/ice.png" alt="ice"  class="ice">
-                 <p class="low">Lower</p>
-                 <p class="game2">ME</p>  
-            </div>
-            <!-- Main Content -->
-            <p>I thought of a number between 1 and 100, can you guess it?</p>
-            <div class="guess_box">
-                <div class="guess_box_title">
-                  <p>Make your guess now:</p>
-                </div>
-                  <input type="text" name="guess" id="guess" maxlength="3"  autocomplete="off">
-                  <input type="submit" name="submit" id="submit" class="button" value="Guess">
-            </div> <!--guess_box-->
-                <div class="buttonHolder">
-                    <div class="button_cont">
-                        <button name="newgame" class="button newgame">New Game!</button>
-                    </div>
-                    <div class="button_cont">
-                        <button name="answer" class="button red">I Surrender!</button>
-                    </div>
-                    <p class="winner">You Won!! Play again.</p>
-                    <p class="loser">Cheating isn't fun. Play again!</p>
-                    <p class="guesstype">Invalid Guess!  Try a number between 1 and 100!</p>
-                </div>
-        </div>
-       	<div class="footer">Sliding door effect attributed to <a href="http://cssdeck.com/labs/sliding-doors">Rishabh</a></div>
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
             <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
             <script src="js/vendor/modernizr-2.6.2.min.js"></script>
